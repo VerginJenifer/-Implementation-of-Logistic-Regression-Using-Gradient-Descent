@@ -8,23 +8,98 @@ To write a program to implement the the Logistic Regression Using Gradient Desce
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. 
-2. 
-3. 
-4. 
+1. Import the necessary libraries: pandas, numpy, and matplotlib.pyplot.
+2. Read the dataset using pandas read_csv function.
+3. Preprocess the data: drop unnecessary columns, convert categorical variables to numerical using label encoding, and separate features (X) and target (Y) variables.
+4. Define the logistic regression model functions: sigmoid function, loss function, gradient descent function, and prediction function.
+5. Generate random data for training
+6. Train the logistic regression model using gradient descent with the generated or provided data.
+7.Evaluate the trained model: calculate the accuracy on the training data.
 
 ## Program:
 ```
 /*
 Program to implement the the Logistic Regression Using Gradient Descent.
-Developed by: 
-RegisterNumber:  
+Developed by: D Vergin Jenifer
+RegisterNumber: 212223240174
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+data=pd.read_csv('/content/Placement_Data (1).csv')
+data
+data=data.drop("sl_no",axis=1)
+data["gender"]=data["gender"].astype('category')
+data["ssc_b"]=data["ssc_b"].astype('category')
+data["hsc_b"]=data["hsc_b"].astype('category')
+data["degree_t"]=data["degree_t"].astype('category')
+data["workex"]=data["workex"].astype('category')
+data["specialisation"]=data["specialisation"].astype('category')
+data["status"]=data["status"].astype('category')
+data["hsc_s"]=data["hsc_s"].astype('category')
+data.dtypes
+data["gender"]=data["gender"].cat.codes
+data["ssc_b"]=data["ssc_b"].cat.codes
+data["hsc_b"]=data["hsc_b"].cat.codes
+data["degree_t"]=data["degree_t"].cat.codes
+data["workex"]=data["workex"].cat.codes
+data["specialisation"]=data["specialisation"].cat.codes
+data["status"]=data["status"].cat.codes
+data["hsc_S"]=data["hsc_s"].cat.codes
+data
+X=data.iloc[:, :-1].values
+Y=data.iloc[:, -1].values
+Y
+import numpy as np
+X = np.random.randn(100, 5)
+Y = np.random.randint(0, 2, size=(100,))  
+X = np.array(X)
+y = np.array(Y)
+
+theta = np.random.randn(X.shape[1])
+
+def sigmoid(z):
+    return 1 / (1 + np.exp(-z))
+
+def loss(theta, X, y):
+    h = sigmoid(X.dot(theta))
+    return -np.sum(y * np.log(h) + (1 - y) * np.log(1 - h))
+
+def gradient_descent(theta, X, y, alpha, num_iterations):
+    m = len(y)
+    for i in range(num_iterations):
+        h = sigmoid(X.dot(theta))
+        gradient = X.T.dot(h - y) / m
+        theta -= alpha * gradient
+    return theta
+
+theta = gradient_descent(theta, X, y, alpha=0.01, num_iterations=1000)
+
+def predict(theta, X):
+    h = sigmoid(X.dot(theta))
+    y_pred = np.where(h >= 0.5, 1, 0)
+    return y_pred
+
+y_pred = predict(theta, X)
+accuracy = np.mean(y_pred.flatten() == y)
+print("Accuracy:", accuracy)
+print(y_pred)
+print(Y)
+xnew = np.array([[0, 87, 0, 95, 0]]) 
+
+y_prednew = predict(theta, xnew)
+print(y_prednew)
+xnew = np.array([[0, 0, 0, 0, 0]])
+y_prednew = predict(theta, xnew)
+print(y_prednew)
 */
 ```
 
 ## Output:
-![logistic regression using gradient descent](sam.png)
-
+![329521824-14b0f61d-3e66-4eca-85fe-90dd93d7d1df](https://github.com/VerginJenifer/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/136251012/857ae720-e342-4802-9b78-118e0a36df18)
+![329521874-6a5098c6-43c4-4d86-9535-d54930456dac](https://github.com/VerginJenifer/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/136251012/4e90f3a3-f0e4-4b8f-b348-60980bfdc0e5)
+![329521931-8555e21b-db39-41ba-8f5e-f04f352ef51e](https://github.com/VerginJenifer/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/136251012/cb2363d5-3d45-456a-8aa0-99fd8b941e7f)
+![329521966-30abaa6b-e491-4fbb-8613-31f33b60d35c](https://github.com/VerginJenifer/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/136251012/0069029d-bb38-43ac-a036-a2cf4c795ee2)
+![329522003-a5ad0e85-9706-4e64-914d-f0091c2a0afd](https://github.com/VerginJenifer/-Implementation-of-Logistic-Regression-Using-Gradient-Descent/assets/136251012/71128f46-db39-4f0c-9ac8-1669bef22f47)
 
 ## Result:
 Thus the program to implement the the Logistic Regression Using Gradient Descent is written and verified using python programming.
